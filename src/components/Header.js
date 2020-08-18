@@ -9,7 +9,12 @@ class Header extends React.Component {
       front: "",
       value: 0,
       valuepast:0,
-      past:""
+      past:"",
+      valueComment:0,
+      comment:"",
+      valueask:0,
+      ask:""
+
     };
   }
 
@@ -25,7 +30,9 @@ class Header extends React.Component {
         that.setState({
           front: response.data.hits,
           value: 1,
-          valuepast:0
+          valuepast:0,
+          valueComment:0,
+          valueask:0,
         });
 
         console.log(response.data.hits);
@@ -52,7 +59,9 @@ class Header extends React.Component {
         that.setState({
           past: response.data.hits,
           value: 0,
-          valuepast:1
+          valuepast:1,
+          valueComment:0,
+          valueask:0,
         });
 
         console.log(response.data.hits);
@@ -73,16 +82,74 @@ class Header extends React.Component {
          value:1
      })
   }
+
+  commentHandler(){
+    
+   let that=this
+    Axios.get("http://hn.algolia.com/api/v1/search?tags=comment")
+      .then(function (response) {
+        var data = response.data.hits;
+        
+        that.setState({
+          comment: response.data.hits,
+          value: 0,
+          valuepast:0,
+          valueComment:1,
+          valueask:0
+        });
+
+        console.log(response.data.hits);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+
+
+  }
+
+  askHandler(){
+
+    let that=this
+    Axios.get("https://hn.algolia.com/api/v1/search?tags=ask_hn")
+      .then(function (response) {
+        var data = response.data.hits;
+        
+        that.setState({
+          ask: response.data.hits,
+          value: 0,
+          valuepast:0,
+          valueComment:0,
+          valueask:1,
+        });
+
+        console.log(response.data.hits);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+
+
+  }
+
+
   render() {
     return (
       <div>
         <div className="headcontainer">
-          <p className="logo">Y</p>
+          <p className="logo" onClick={this.frontHandler.bind(this)}>Y</p>
           <p className="logoname pointer" onClick={this.frontHandler.bind(this)}>Hacker News</p>
           <p> new |</p>
           <p  className="pointer" onClick={this.pastHandler.bind(this)}>past |</p>
-          <p>Comments |</p>
-          <p>asks |</p>
+          <p onClick={this.commentHandler.bind(this)}  className="pointer">Comments |</p>
+          <p className="pointer"  onClick={this.askHandler.bind(this)}>asks |</p>
           <p>show |</p>
           <p>jobs |</p>
           <p>submit |</p>
@@ -137,6 +204,55 @@ class Header extends React.Component {
 
 </div>
             : ""}
+        </div>
+        <div>
+            {
+                this.state.valueComment===1?
+
+                <div  className="frontData">
+
+                {
+                    this.state.comment.map((ds)=>{
+
+                        return (
+                            <div> 
+                                <p className="desc">{ds.author} | parent | on:  { ds.story_title}</p>
+                                <p > {ds.comment_text}</p>
+                            </div>
+                        )
+                    })
+                }
+
+                </div> 
+                :""
+
+            }
+        </div>
+
+        <div>
+        {
+                this.state.valueask===1?
+
+                <div  className="frontData">
+
+                {
+                    this.state.ask.map((ds)=>{
+
+                        return (
+                            <div> 
+                               
+                                <p Key={ds.objectID}>{this.state.ask.indexOf(ds) + 1} {ds.title}</p>
+                              <p className="desc">{ds.points} by {ds.author} |  { ds.num_comments} comments</p>
+                            </div>
+                        )
+                    })
+                }
+
+                </div> 
+                :""
+
+            }
+
         </div>
       </div>
     );

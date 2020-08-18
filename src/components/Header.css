@@ -31,6 +31,7 @@
     margin-left: 120px;
     margin-right: 120px;
     padding-left: 10px;
+    padding-right: 10px;
 
 }
 
@@ -69,6 +70,7 @@
     padding-right: 5px;
     padding-top: 3px;
     padding-bottom: 3px;
+    cursor: pointer;
 
 }
 
