@@ -1,0 +1,93 @@
+.headcontainer{
+
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 10px;
+
+    width:auto;
+    background-color:#ff6600;
+    color: black;
+    height: 30px;
+    font-size: 10pt;
+    margin-left: 120px;
+    margin-right: 120px;
+    padding-left: 10px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+    align-items: center;
+}
+
+.frontData{
+
+    display: flex;
+    flex-direction: column;
+
+    width:auto;
+    background-color:rgb(246, 246, 239);;
+    color: black;
+    height: auto;
+    font-size: smaller;
+    margin-left: 120px;
+    margin-right: 120px;
+    padding-left: 10px;
+
+}
+
+.title{
+    font-size: 10pt;
+    margin-bottom: 0px;
+    border: 0;
+    cursor: pointer;
+    
+
+}
+.desc{
+    font-size: 7pt;
+    margin-left: 10px;
+    border: 0;
+    margin-top: 0px;
+    color: #828282;;
+}
+.titlebody{
+    height: 35px;
+    margin-top: 2px;
+}
+
+.logo{
+
+   
+    margin: 10px;
+    margin-left: 0px;
+    border-color:  white;
+    background-color: #ff6600;
+    color: white;
+    font-weight: bold;
+    border-style: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+}
+
+.logoname{
+
+    font-weight: bolder;
+    margin-right: 10px;
+}
+.link{
+    
+    font-size: 10pt;
+    margin-bottom: 0px;
+    border: 0;
+    cursor: pointer;
+    color: black;
+    text-decoration:none;
+
+}
+
+.pointer{
+    cursor: pointer;
+}
