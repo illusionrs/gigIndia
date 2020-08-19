@@ -21,7 +21,7 @@ class Header extends React.Component {
   componentDidMount() {
     let that = this;
 
-    Axios.get("http://hn.algolia.com/api/v1/search?tags=front_page")
+    Axios.get("https://hn.algolia.com/api/v1/search?tags=front_page")
       .then(function (response) {
        
       
@@ -50,7 +50,7 @@ class Header extends React.Component {
 
     let that = this;
 
-    Axios.get("http://hn.algolia.com/api/v1/search_by_date?tags=story")
+    Axios.get("https://hn.algolia.com/api/v1/search_by_date?tags=story")
       .then(function (response) {
         
         
@@ -84,7 +84,7 @@ class Header extends React.Component {
   commentHandler(){
     
    let that=this
-    Axios.get("http://hn.algolia.com/api/v1/search?tags=comment")
+    Axios.get("https://hn.algolia.com/api/v1/search?tags=comment")
       .then(function (response) {
        
         
