@@ -23,10 +23,8 @@ class Header extends React.Component {
 
     Axios.get("http://hn.algolia.com/api/v1/search?tags=front_page")
       .then(function (response) {
-        var data = response.data.hits;
-        var temp = data.map((ds) => {
-          return ds.title;
-        });
+       
+      
         that.setState({
           front: response.data.hits,
           value: 1,
@@ -54,7 +52,7 @@ class Header extends React.Component {
 
     Axios.get("http://hn.algolia.com/api/v1/search_by_date?tags=story")
       .then(function (response) {
-        var data = response.data.hits;
+        
         
         that.setState({
           past: response.data.hits,
@@ -88,7 +86,7 @@ class Header extends React.Component {
    let that=this
     Axios.get("http://hn.algolia.com/api/v1/search?tags=comment")
       .then(function (response) {
-        var data = response.data.hits;
+       
         
         that.setState({
           comment: response.data.hits,
@@ -116,7 +114,7 @@ class Header extends React.Component {
     let that=this
     Axios.get("https://hn.algolia.com/api/v1/search?tags=ask_hn")
       .then(function (response) {
-        var data = response.data.hits;
+       
         
         that.setState({
           ask: response.data.hits,
@@ -142,7 +140,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="hs">
         <div className="headcontainer">
           <p className="logo" onClick={this.frontHandler.bind(this)}>Y</p>
           <p className="logoname pointer" onClick={this.frontHandler.bind(this)}>Hacker News</p>
@@ -159,7 +157,7 @@ class Header extends React.Component {
           {this.state.value === 1
             ? this.state.front.map((ds) => {
                 return (
-                  <div className="titlebody">
+                  <div className="titlebody" key={ds.objectID}>
                     <a href={ds.url} className="link">
                       <p className="title" key={ds}>
                         {this.state.front.indexOf(ds) + 1}.{ds.title}{" "}
@@ -186,7 +184,7 @@ class Header extends React.Component {
               
            { this.state.past.map((ds) => {
                 return (
-                  <div className="titlebody">
+                  <div className="titlebody" key={ds.objectID}>
                     <a href={ds.url} className="link">
                       <p className="title" key={ds}>
                         {this.state.past.indexOf(ds) + 1}.{ds.title}{" "}
@@ -205,18 +203,18 @@ class Header extends React.Component {
 </div>
             : ""}
         </div>
-        <div>
+        <div key="commentsec">
             {
                 this.state.valueComment===1?
 
-                <div  className="frontData">
+                <div  key="commentbox" className="frontData">
 
                 {
                     this.state.comment.map((ds)=>{
 
                         return (
-                            <div> 
-                                <p className="desc">{ds.author} | parent | on:  { ds.story_title}</p>
+                            <div key={ds.objectID}> 
+                                <p className="desc" key={ds.story_title}>{ds.author} | parent | on:  { ds.story_title}</p>
                                 <p > {ds.comment_text}</p>
                             </div>
                         )
@@ -239,9 +237,9 @@ class Header extends React.Component {
                     this.state.ask.map((ds)=>{
 
                         return (
-                            <div> 
+                            <div key={ds.created_at_i}> 
                                
-                                <p Key={ds.objectID}>{this.state.ask.indexOf(ds) + 1} {ds.title}</p>
+                                <p key={ds.objectID}>{this.state.ask.indexOf(ds) + 1} {ds.title}</p>
                               <p className="desc">{ds.points} by {ds.author} |  { ds.num_comments} comments</p>
                             </div>
                         )
